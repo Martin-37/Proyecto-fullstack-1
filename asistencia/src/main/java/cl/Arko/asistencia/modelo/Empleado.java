@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Primary;
 public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idEmpleado;
+    private Integer id_Empleado;
 
     @Column(nullable = false, unique = true, length = 13)
     private String rut;

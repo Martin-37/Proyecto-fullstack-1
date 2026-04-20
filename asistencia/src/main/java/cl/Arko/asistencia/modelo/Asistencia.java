@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.security.PrivateKey;
+import java.time.LocalTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "Asistencia")
@@ -16,15 +18,22 @@ import java.security.PrivateKey;
 @NoArgsConstructor
 public class Asistencia {
 
-    @Autowired
-    private Empleado empleado;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idAs;
+    //Extrae el Rut del trabajador para identificarlo, No se usa ID para ecitar posibles errores de identificacion manual.
+    @ManyToOne
+    @JoinColumn(name = "Empleado", referencedColumnName = "rut", nullable = false )
+    private String empleado;
 
     @Column(nullable = false)
-    @ForeignKey(name = "FK_ASIS_EMP")
-    private String rutEmp;
+    private Date fecha;
 
+    @Column(nullable = false)
+    private LocalTime hora_llegada;
+
+    @Column
+    private LocalTime hora_salida;
+
+    //Almacena estado para verificar si se termino el dia
+    @Column(nullable = false)
+    private boolean estado;
 }
