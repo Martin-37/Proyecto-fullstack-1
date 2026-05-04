@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.security.PrivateKey;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -19,10 +17,10 @@ import java.util.Date;
 public class Asistencia {
 
     @Id
-    //Extrae el Rut del trabajador para identificarlo, No se usa ID para ecitar posibles errores de identificacion manual.
+    //Extrae el Rut del trabajador para identificarlo, No se usa ID para evitar posibles errores de identificacion manual.
     @ManyToOne
-    @JoinColumn(name = "Empleado", referencedColumnName = "rut", nullable = false )
-    private String empleado;
+    @JoinColumn(name = "Empleado", referencedColumnName = "numrun_emp", nullable = false )
+    private Integer empleado;
 
     @Column(nullable = false)
     private Date fecha;

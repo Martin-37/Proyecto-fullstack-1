@@ -12,9 +12,9 @@ import java.util.Date;
 public interface AsistenciaRepository extends JpaRepository<Asistencia, String> {
 
 
-    Asistencia marcarLLegada(String rutEmp, Date fecha, LocalTime hora_llegada);
+    Asistencia marcarLLegada(Integer numrun_emp, Date fecha, LocalTime hora_llegada);
 
-    Asistencia marcarSalida(String rutEmp,Date fecha, LocalTime hora_salida);
+    Asistencia marcarSalida(Integer numrun_emp,Date fecha, LocalTime hora_salida);
 
     Integer calcularHoras(Asistencia asistencia);
 }
