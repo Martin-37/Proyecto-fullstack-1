@@ -31,7 +31,7 @@ public class Asistencia {
     @Column
     private LocalTime hora_salida;
 
-    //Almacena estado para verificar si se termino el dia
+    //Almacena si se marco la salida para evitar errores, False = no se a marcado True = ya marco salida
     @Column(nullable = false)
     private boolean estado;
 }
