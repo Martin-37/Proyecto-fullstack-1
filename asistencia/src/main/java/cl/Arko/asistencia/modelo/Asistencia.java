@@ -20,7 +20,7 @@ public class Asistencia {
     //Extrae el Rut del trabajador para identificarlo, No se usa ID para evitar posibles errores de identificacion manual.
     @ManyToOne
     @JoinColumn(name = "Empleado", referencedColumnName = "numrun_emp", nullable = false )
-    private Integer empleado;
+    private Integer numrun_emp;
 
     @Column(nullable = false)
     private Date fecha;

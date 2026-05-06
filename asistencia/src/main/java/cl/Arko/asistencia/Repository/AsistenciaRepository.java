@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -16,4 +17,7 @@ public interface AsistenciaRepository extends JpaRepository<Asistencia, Integer>
 
     @Query("SELECT a FROM asistencia a WHERE a.numrun_emp = :numrun_emp AND a.fecha = :fecha")
     Optional<Asistencia> findByNumrunAndFecha(@Param("numrun_emp") Integer numrun_emp, @Param("fecha") Date fecha);
+
+    @Query("SELECT a FROM asistencia a WHERE a.fecha BETWEEN :fecha1 AND :fecha2")
+    List<Asistencia> findByFechaBetween(@Param("fecha1") Date fecha1, @Param("fecha2") Date fecha2);
 }
