@@ -1,0 +1,37 @@
+package cl.Arko.asistencia.modelo;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalTime;
+import java.util.Date;
+
+@Entity
+@Table(name = "Asistencia")
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Asistencia {
+
+    @Id
+    //Extrae el Rut del trabajador para identificarlo, No se usa ID para evitar posibles errores de identificacion manual.
+    @ManyToOne
+    @JoinColumn(name = "Empleado", referencedColumnName = "numrun_emp", nullable = false )
+    private Integer numrun_emp;
+
+    @Column(nullable = false)
+    private Date fecha;
+
+    @Column(nullable = false)
+    private LocalTime hora_llegada;
+
+    @Column
+    private LocalTime hora_salida;
+
+    //Almacena si se marco la salida para evitar errores, False = no se a marcado True = ya marco salida
+    @Column(nullable = false)
+    private boolean estado;
+}

@@ -1,7 +1,10 @@
 package cl.dsy1103.usuarios.controller;
 
+import cl.dsy1103.usuarios.dto.LoginRequestDTO;
+import cl.dsy1103.usuarios.dto.LoginResponseDTO;
 import cl.dsy1103.usuarios.dto.UsuarioRequestDTO;
 import cl.dsy1103.usuarios.dto.UsuarioResponseDTO;
+import cl.dsy1103.usuarios.service.UsuarioAuthService;
 import cl.dsy1103.usuarios.service.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +19,12 @@ import java.util.List;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
+    private final UsuarioAuthService usuarioAuthService;
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody LoginRequestDTO request) {
+        return ResponseEntity.ok(usuarioAuthService.login(request));
+    }
 
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDTO>> obtenerTodos() {

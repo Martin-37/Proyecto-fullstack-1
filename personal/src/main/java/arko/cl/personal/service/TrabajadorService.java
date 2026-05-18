@@ -4,6 +4,7 @@ import arko.cl.personal.dto.TrabajadorRequestDTO;
 import arko.cl.personal.dto.TrabajadorResponseDTO;
 import arko.cl.personal.model.Trabajador;
 import arko.cl.personal.repository.TrabajadorRepository;
+import arko.cl.personal.webclient.AsistenciaClient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,9 +16,11 @@ import java.util.stream.Collectors;
 public class TrabajadorService {
 
     private final TrabajadorRepository trabajadorRepository;
+    private final AsistenciaClient asistenciaClient;
 
-    public TrabajadorService(TrabajadorRepository trabajadorRepository) {
+    public TrabajadorService(TrabajadorRepository trabajadorRepository, AsistenciaClient asistenciaClient) {
         this.trabajadorRepository = trabajadorRepository;
+        this.asistenciaClient = asistenciaClient;
     }
 
     public TrabajadorResponseDTO crearTrabajador(TrabajadorRequestDTO dto) {
@@ -119,6 +122,10 @@ public class TrabajadorService {
         dto.setFono(trabajador.getFono());
         dto.setMailTrab(trabajador.getMailTrab());
         dto.setEstado(trabajador.getEstado());
+
+        // Obtener datos de asistencia del microservicio de asistencia
+        dto.setAsistenciaInfo(asistenciaClient.obtenerAsistenciaByTrabajador(trabajador.getNumrunTrab()));
+
         return dto;
     }
 }

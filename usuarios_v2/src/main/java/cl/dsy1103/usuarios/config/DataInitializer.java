@@ -6,6 +6,7 @@ import cl.dsy1103.usuarios.repository.RolRepository;
 import cl.dsy1103.usuarios.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,6 +15,7 @@ public class DataInitializer implements CommandLineRunner {
 
     private final RolRepository rolRepository;
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) {
@@ -41,23 +43,23 @@ public class DataInitializer implements CommandLineRunner {
 
             usuarioRepository.save(new Usuario(null,
                     "jperez", admin,
-                    "juan.perez@empresa.cl", "admin1234", "Activo"));
+                    "juan.perez@empresa.cl", passwordEncoder.encode("admin1234"), "Activo"));
 
             usuarioRepository.save(new Usuario(null,
                     "mlopez", supervisor,
-                    "maria.lopez@empresa.cl", "super5678", "Activo"));
+                    "maria.lopez@empresa.cl", passwordEncoder.encode("super5678"), "Activo"));
 
             usuarioRepository.save(new Usuario(null,
                     "cgomez", operario,
-                    "carlos.gomez@empresa.cl", "oper9012", "Activo"));
+                    "carlos.gomez@empresa.cl", passwordEncoder.encode("oper9012"), "Activo"));
 
             usuarioRepository.save(new Usuario(null,
                     "atorres", supervisor,
-                    "ana.torres@empresa.cl", "super3456", "Inactivo"));
+                    "ana.torres@empresa.cl", passwordEncoder.encode("super3456"), "Inactivo"));
 
             usuarioRepository.save(new Usuario(null,
                     "pramirez", auditor,
-                    "pedro.ramirez@empresa.cl", "audi7890", "Activo"));
+                    "pedro.ramirez@empresa.cl", passwordEncoder.encode("audi7890"), "Activo"));
 
             System.out.println(">>> DataInitializer: roles y usuarios de prueba cargados correctamente.");
         }
