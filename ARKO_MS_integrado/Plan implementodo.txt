@@ -1,0 +1,14 @@
+Plan ejecutado por el equipo para implementar los MS en AWS.
+-Primero se crearon 11 MS, algunos con conexiones entre ellos.
+-A varios se le incorporo JWT.
+-Se creo un MS principal con jwt que funciona como login mientras que los otros MS utilizan el mismo token para validar el usuario.
+-Se incorporo Dockers compose .yml en la carpeta general y dockerfile en cada MS para que el compose pueda leer y reescribir los datos en su contenedor.
+-En Docker compose:
+	- se establecieron los puertos y algunas llamadas a otros MS para que funcione todo unificado.
+	- Se creo una BD para todos los MS.
+	- Se utilizo update en DDL_AUTO para evitar que se elimine la BD.
+	- Se utilizo el jwt secret igual para todos los MS para utilizar el mismo token del creador.
+	- Se incorporo el nginx para exponer los endopoints en AWS desde el puerto 80.
+- Se implemento swagger en todos los MS.
+- Se utilizo conexiones por Webclient para llamar a los datos del endpoint de otros MS en conjunto con JWT para llamar a otros datos solicitando el header con el token.
+- Incorporo la validación de las conexiones en algunos MS con mensajes claros ante no tener respuesta de la conexión.
